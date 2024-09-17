@@ -10,7 +10,7 @@
             line-height: 1.6;
             margin: 0;
             padding: 0;
-            background-image: url"/Images/hive-city.png"; /* Replace with your actual background image URL */
+            background-image: url("/Images/hive-city.png"); /* Replace with your actual background image URL */
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -41,23 +41,29 @@
         a:hover {
             text-decoration: underline;
         }
+        /* Custom styles for the Crusade Forces list */
+        .crusade-forces-title {
+            font-weight: bold;
+        }
+        .crusade-forces-list {
+            margin-left: 20px; /* Indents the forces under the Crusade Forces title */
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Warhammer Crusade Campaign</h1>
         <p>Welcome to our Warhammer Crusade Campaign site. Here you can find information about our ongoing battles and campaign progress.</p>
+
         <h2>Campaign Pages</h2>
         <ul>
             <li><a href="battle-stories.html">Battle Stories</a></li>
-            <li>
-                <a href="#">Crusade Forces</a>
-                <ul>
-                    <li><a href="tyranid-hive-fleet.html">Tyranid Hive Fleet</a></li>
-                    <li><a href="mechanicus-forge-world.html">Mechanicus Forge World</a></li>
-                    <li><a href="necron-tombs.html">Necron Tombs</a></li>
-                </ul>
-            </li>
+            <li class="crusade-forces-title">Crusade Forces</li> <!-- Crusade Forces as a title -->
+            <ul class="crusade-forces-list">
+                <li><a href="tyranid-hive-fleet.html">Tyranid Hive Fleet</a></li>
+                <li><a href="mechanicus-forge-world.html">Mechanicus Forge World</a></li>
+                <li><a href="necron-tombs.html">Necron Tombs</a></li>
+            </ul>
             <li><a href="#">Campaign Map</a></li>
             <li><a href="#">Rules Reference</a></li>
             <li><a href="#">Special Mission Rules List</a></li>
