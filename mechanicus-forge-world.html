@@ -15,6 +15,8 @@
             background-position: center;
             background-attachment: fixed;
             min-height: 100vh;
+            display: flex;
+            justify-content: center;
         }
         .container {
             max-width: 1000px;
@@ -62,9 +64,56 @@
         .experience {
             text-align: center;
         }
+        .card {
+            width: 250px;
+            margin-right: 20px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 40px;
+            align-self: flex-start;
+        }
+        .card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        .card h2 {
+            color: #333;
+        }
+        .card p, .card ul {
+            color: #555;
+        }
+        .card ul {
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+        @media (max-width: 900px) {
+            body {
+                flex-direction: column;
+                align-items: center;
+            }
+        
+            .card {
+                margin-bottom: 20px;
+            }
     </style>
 </head>
 <body>
+    <div class="card">
+        <img src="/Images/hive-fleet-symbol.webp" alt="Hive Fleet Symbol">
+        <h2>Hive Fleet Overview</h2>
+        <p>The Tyranid Hive Fleet is an unstoppable force. Known for consuming entire worlds, their units specialize in biological warfare, adapting to any environment and overpowering enemies with sheer numbers.</p>
+        <p><strong>Key Strengths:</strong></p>
+        <ul>
+            <li>Adaptability</li>
+            <li>Synaptic Control</li>
+            <li>Massive Numbers</li>
+        </ul>
+    </div>
+    
     <div class="container">
         <h1>Forge World of Zénim Prime<br>Location: Zén Locium Sector</h1>
         <p>This roster lists the units available for your Adeptus Mechanicus Forge World in the Crusade Campaign. Select your units strategically to optimize your army’s technological dominance!</p>
