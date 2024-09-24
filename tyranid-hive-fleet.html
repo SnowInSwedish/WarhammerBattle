@@ -60,8 +60,8 @@
         td {
             background-color: #f9f9f9;
         }
-        table tr:nth-child(even) td {
-            background-color: #52c293 !important;
+        tr:nth-child(even) td {
+            background-color: #ffffff;
         }
         a {
             color: var(--primary-color);
@@ -147,6 +147,9 @@
             background-color: #f0f0f0;
             padding: 15px;
             border-top: 1px solid #ccc;
+        }
+        table td:nth-child(even) {
+            background-color: #42b176 !important; /* Ensure this rule takes precedence */
         }
     </style>
 </head>
