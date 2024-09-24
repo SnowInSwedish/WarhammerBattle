@@ -4,107 +4,154 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tyranid Hive Fleet - Unit Roster</title>
+    <meta name="description" content="Tyranid Hive Fleet unit roster for Crusade Campaign. View available units and their stats.">
     <style>
+        :root {
+            --primary-color: #800000;
+            --secondary-color: #400000;
+            --text-color: #333;
+            --background-color: rgba(255, 255, 255, 0.8);
+        }
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            background-image: url("/Images/hive-city.png"); /* Adjust path if necessary */
+            background-image: url("/api/placeholder/1920/1080");
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             min-height: 100vh;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            align-items: center;
         }
         .container {
-            max-width: 900px;
+            max-width: 1200px;
             margin: 40px auto;
-            background-color: rgba(255, 255, 255, 0.9);
+            background-color: var(--background-color);
             padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
         }
         h1, h2 {
-            color: #333;
+            color: var(--primary-color);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
         table {
             width: 100%;
-            border-collapse: collapse;
+            border-collapse: separate;
+            border-spacing: 0;
             margin-top: 20px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
         }
         table, th, td {
-            border: 1px solid #333;
+            border: 1px solid var(--secondary-color);
         }
         th, td {
-            padding: 10px;
+            padding: 15px;
             text-align: left;
         }
         th {
-            background-color: #555;
+            background-color: var(--primary-color);
             color: white;
+            text-transform: uppercase;
         }
         td {
             background-color: #f9f9f9;
         }
+        tr:nth-child(even) td {
+            background-color: #f1f1f1;
+        }
         a {
-            color: #0066cc;
+            color: var(--primary-color);
             text-decoration: none;
+            transition: color 0.3s ease;
         }
         a:hover {
+            color: var(--secondary-color);
             text-decoration: underline;
         }
         .back-link {
-            display: block;
+            display: inline-block;
             margin-top: 20px;
+            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .back-link:hover {
+            background-color: var(--secondary-color);
+            text-decoration: none;
         }
         .experience {
             text-align: center;
         }
         .card {
-            width: 250px;
-            margin-right: 20px;
+            width: 300px;
+            margin: 20px auto;
             padding: 20px;
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-            position: sticky;
-            top: 40px;
-            align-self: flex-start;
+            background-color: var(--background-color);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
         }
         .card img {
-            max-width: 40%;
+            max-width: 60%;
             height: auto;
-            border-radius: 5px;
+            border-radius: 50%;
             display: block;
-            margin: 0 auto;
+            margin: 0 auto 20px;
+            border: 3px solid var(--primary-color);
         }
         .card h2 {
-            color: #333;
+            color: var(--primary-color);
+            text-align: center;
         }
         .card p, .card ul {
-            color: #555;
+            color: var(--text-color);
         }
         .card ul {
-            list-style-type: disc;
-            margin-left: 20px;
+            list-style-type: none;
+            padding-left: 0;
         }
-        @media (max-width: 900px) {
-            body {
-                flex-direction: column;
-                align-items: center;
+        .card li::before {
+            content: "• ";
+            color: var(--primary-color);
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
             }
-        
-            .card {
-                margin-bottom: 20px;
+            table {
+                font-size: 14px;
+            }
+            th, td {
+                padding: 10px;
             }
         }
-
+        .unit-row {
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .unit-row:hover {
+            background-color: #e0e0e0;
+        }
+        .unit-details {
+            display: none;
+            background-color: #f0f0f0;
+            padding: 15px;
+            border-top: 1px solid #ccc;
+        }
     </style>
 </head>
 <body>
     <div class="card">
-        <img src="/Images/hive-fleet-symbol.webp" alt="Hive Fleet Symbol">
+        <img src="/api/placeholder/300/300" alt="Hive Fleet Symbol">
         <h2>Hive Fleet Overview</h2>
         <p>The Tyranid Hive Fleet is an unstoppable force. Known for consuming entire worlds, their units specialize in biological warfare, adapting to any environment and overpowering enemies with sheer numbers.</p>
         <p><strong>Key Strengths:</strong></p>
@@ -132,7 +179,8 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                <!-- TT, allt mellan dessa plus unit stylerna ovan om du vill ha liknande-->
+                <tr class="unit-row" tabindex="0" role="button" aria-expanded="false">
                     <td>Deathleaper</td>
                     <td></td>
                     <td>Epic Hero</td>
@@ -140,7 +188,13 @@
                     <td>Lone Operative</td>
                     <td></td>
                 </tr>
-                <tr>
+                <tr class="unit-details">
+                    <td colspan="6">
+                        <p><strong>Deathleaper Details:</strong> A specialized assassin-organism, Deathleaper is known for its ability to infiltrate enemy lines and sow terror among the ranks.</p>
+                    </td>
+                </tr>
+                <!-- TT, allt mellan dessa plus unit stylerna ovan om du vill ha liknande -->
+                <tr class="unit-row" tabindex="0" role="button" aria-expanded="false">
                     <td>Hive Tyrant</td>
                     <td>The Swarm Lord</td>
                     <td>HQ</td>
@@ -148,7 +202,12 @@
                     <td>Synapse, Shadow in the Warp, Monstrous Scything Talons</td>
                     <td></td>
                 </tr>
-                <tr>
+                <tr class="unit-details">
+                    <td colspan="6">
+                        <p><strong>Hive Tyrant Details:</strong> The Swarm Lord is a formidable Hive Tyrant, acting as the primary synaptic conduit for the Tyranid swarm. Its presence on the battlefield significantly bolsters the effectiveness of nearby Tyranid organisms.</p>
+                    </td>
+                </tr>
+                <tr class="unit-row" tabindex="0" role="button" aria-expanded="false"></tr>
                     <td>Broodlord</td>
                     <td>Mind Reaper</td>
                     <td>HQ</td>
@@ -156,7 +215,12 @@
                     <td>Synapse, Psychic Mastery</td>
                     <td></td>
                 </tr>
-                <tr>
+                <tr class="unit-details">
+                    <td colspan="6">
+                        <p><strong>Broodlord Details:</strong> Mind Reaper is a powerful psyker, capable of tearing through enemy minds and coordinating Genestealer assaults with terrifying efficiency.</p>
+                    </td>
+                </tr>
+                <tr class="unit-row" tabindex="0" role="button" aria-expanded="false">
                     <td>Genestealers</td>
                     <td>The Silent Claw</td>
                     <td>Infantry</td>
@@ -164,7 +228,12 @@
                     <td>Swift and Deadly, Rending Claws</td>
                     <td></td>
                 </tr>
-                <tr>
+                <tr class="unit-details">
+                    <td colspan="6">
+                        <p><strong>Genestealers Details:</strong> The Silent Claw is a lethal group of Genestealers, renowned for their ability to infiltrate enemy positions and tear apart foes in close combat.</p>
+                    </td>
+                </tr>
+                <tr class="unit-row" tabindex="0" role="button" aria-expanded="false">
                     <td>Termagants</td>
                     <td>Scuttlers of Death</td>
                     <td>Battle line</td>
@@ -172,15 +241,25 @@
                     <td>Fleshborers, Synapse Support</td>
                     <td></td>
                 </tr>
-                <tr>
+                <tr class="unit-details">
+                    <td colspan="6">
+                        <p><strong>Termagants Details:</strong> The Scuttlers of Death are a numerous brood of Termagants, overwhelming enemies with sheer numbers and a hail of bio-weapon fire.</p>
+                    </td>
+                </tr>
+                <tr class="unit-row" tabindex="0" role="button" aria-expanded="false">
                     <td>Carnifex</td>
                     <td>Crusher Beast</td>
                     <td>Monster</td>
                     <td class="experience">7</td>
-                    <td>Monstrous Crushing Claws <br> Thresher Scythe</td>
+                    <td>Monstrous Crushing Claws, Thresher Scythe</td>
                     <td></td>
                 </tr>
-                <tr>
+                <tr class="unit-details">
+                    <td colspan="6">
+                        <p><strong>Carnifex Details:</strong> Crusher Beast is a living battering ram, capable of smashing through fortifications and enemy battle lines with equal ease.</p>
+                    </td>
+                </tr>
+                <tr class="unit-row" tabindex="0" role="button" aria-expanded="false">
                     <td>Trygon</td>
                     <td>Death Serpent</td>
                     <td>Monster</td>
@@ -188,10 +267,28 @@
                     <td>Tunnel Networks, Synapse, Bio-electric Pulse</td>
                     <td></td>
                 </tr>
+                <tr class="unit-details">
+                    <td colspan="6">
+                        <p><strong>Trygon Details:</strong> Death Serpent is a massive tunneling creature, capable of delivering surprise attacks from below and disrupting enemy formations with its bio-electric pulse.</p>
+                    </td>
+                </tr>
+                
             </tbody>
         </table>
-        <a href="tyranid-rules.html">Read the Rules here.</a>
+        <a href="tyranid-rules.html">Read the Rules here</a>
         <a href="index.html" class="back-link">← Back to Home Page</a>
     </div>
+
+    <script>
+        document.querySelectorAll('.unit-row').forEach(row => {
+            row.addEventListener('click', () => {
+                const details = row.nextElementSibling;
+                const isExpanded = row.getAttribute('aria-expanded') === 'true';
+                
+                row.setAttribute('aria-expanded', !isExpanded);
+                details.style.display = isExpanded ? 'none' : 'table-row';
+            });
+        });
+    </script>
 </body>
 </html>
